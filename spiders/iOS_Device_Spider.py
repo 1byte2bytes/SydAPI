@@ -1,9 +1,11 @@
 import scrapy
 import dataset
+from spiders import settings
 
 from scrapy.selector import HtmlXPathSelector
 
-db = dataset.connect('sqlite:///iOSDevices.sqlite3')
+#db = dataset.connect('sqlite:///iOSDevices.sqlite3')
+db = dataset.connect('{}://{}:{}@{}:{}/{}'.format(settings.db_connector, settings.db_username, settings.db_password, settings.db_host, settings.db_port, settings.db_database))
 table = db['devices']
 
 class device():
