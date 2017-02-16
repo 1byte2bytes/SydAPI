@@ -1,6 +1,6 @@
 import scrapy
 import dataset
-from spiders import settings
+import settings
 
 from scrapy.selector import HtmlXPathSelector
 
