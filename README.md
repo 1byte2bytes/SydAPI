@@ -1,5 +1,5 @@
 SydAPI
 
 ```
-pip install scrapy dataset
+pip install scrapy dataset psycopg2
 ```
