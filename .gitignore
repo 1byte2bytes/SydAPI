@@ -41,6 +41,7 @@ crashlytics.properties
 crashlytics-build.properties
 fabric.properties
 
+*.sqlite3
 
 # Byte-compiled / optimized / DLL files
 __pycache__/
