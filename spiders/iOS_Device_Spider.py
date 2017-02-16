@@ -81,6 +81,16 @@ def convertTableRowToDevice(row):
 def writeDeviceToDatabase(dev):
     table.insert(dev.__dict__)
 
+def getDeviceNameFromID(ID):
+    for letter in ID:
+        try:
+            int(letter)
+            index = ID.index(letter)
+            device = ID[:index]
+            return device
+        except Exception as e:
+            pass
+
 class QuotesSpider(scrapy.Spider):
     name = "quotes"
     start_urls = [
@@ -111,5 +121,13 @@ class QuotesSpider(scrapy.Spider):
                     rowText = ''
                 row.append(rowText)
 
-            dev = convertTableRowToDevice(row)
-            writeDeviceToDatabase(dev)
+            deviceName = getDeviceNameFromID(row[1])
+            devicesFromRow = splitChartColumnData(row[1])
+            for deviceID in devicesFromRow:
+                tempRow = row
+                if devicesFromRow.index(deviceID) != 0:
+                    tempRow[1] = deviceName.replace(" ", "") + deviceID.replace(" ", "")
+                else:
+                    tempRow[1] = deviceID
+                dev = convertTableRowToDevice(row)
+                writeDeviceToDatabase(dev)
